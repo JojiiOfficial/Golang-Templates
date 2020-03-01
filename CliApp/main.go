@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/JojiiOfficial/Golang-Templates/GoLogServer/constants"
+	"github.com/JojiiOfficial/Golang-Templates/constants"
 	log "github.com/sirupsen/logrus"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )
