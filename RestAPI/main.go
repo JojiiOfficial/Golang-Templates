@@ -38,8 +38,6 @@ var (
 	configCmd           = app.Command("config", "Commands for the config file")
 	configCmdCreate     = configCmd.Command("create", "Create config file")
 	configCmdCreateName = configCmdCreate.Arg("name", "Config filename").Default(models.GetDefaultConfig()).String()
-
-	benchCmd = app.Command("bench", "benchmark the server")
 )
 
 var (
@@ -118,6 +116,7 @@ func main() {
 
 		var err error
 		db, err = storage.ConnectDB(config, isDebug, *appNoColor)
+		err = nil
 		if err != nil {
 			log.Fatalln(err.Error())
 			return

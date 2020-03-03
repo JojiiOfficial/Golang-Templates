@@ -33,7 +33,7 @@ func NewAuthHandler(request *http.Request, db *dbhelper.DBhelper) *AuthHandler {
 func (authHandler AuthHandler) GetBearer() string {
 	authHeader, has := authHandler.Request.Header["Authorization"]
 	//Validate bearer token
-	if !has || len(authHeader) == 0 || !strings.HasPrefix(authHeader[0], "Bearer") || len(tokenFromBearerHeader(authHeader[0])) != 64 {
+	if !has || len(authHeader) == 0 || !strings.HasPrefix(authHeader[0], "Bearer") {
 		return ""
 	}
 	return tokenFromBearerHeader(authHeader[0])

@@ -51,6 +51,14 @@ type RouteFunction func(*dbhelper.DBhelper, handlerData, http.ResponseWriter, *h
 //Routes
 var (
 	routes = Routes{
+		//Ping
+		Route{
+			Name:        "ping",
+			Pattern:     "/ping",
+			Method:      POSTMethod,
+			HandlerFunc: Ping,
+			HandlerType: defaultRequest,
+		},
 		//User
 		Route{
 			Name:    "login",

@@ -9,10 +9,21 @@ import (
 
 //Config Configuration structure
 type Config struct {
+	Server serverConfig
+}
+
+type serverConfig struct {
+	URL        string `required:"true"`
+	IgnoreCert bool
 }
 
 func getDefaultConfig() Config {
-	return Config{}
+	return Config{
+		Server: serverConfig{
+			URL:        "http://localhost:9999",
+			IgnoreCert: false,
+		},
+	}
 }
 
 //InitConfig inits the configfile
@@ -26,10 +37,8 @@ func InitConfig(defaultFile, file string) (*Config, error) {
 	}
 
 	//Check if config already exists
-	if !needCreate {
-		_, err := os.Stat(file)
-		needCreate = err != nil
-	}
+	_, err := os.Stat(file)
+	needCreate = err != nil
 
 	if needCreate {
 		//Autocreate folder
@@ -69,6 +78,5 @@ func InitConfig(defaultFile, file string) (*Config, error) {
 //Validate check the config
 func (config *Config) Validate() error {
 	//Put in your validation logic here
-
 	return nil
 }

@@ -4,6 +4,7 @@ import (
 	"Golang-Templates/RestAPI/constants"
 	"os"
 	"path"
+	"path/filepath"
 	"strings"
 
 	gaw "github.com/JojiiOfficial/GoAw"
@@ -29,11 +30,11 @@ type configServer struct {
 }
 
 type configDBstruct struct {
-	Host         string `required:"true"`
-	Username     string `required:"true"`
-	Database     string `required:"true"`
-	Pass         string `required:"true"`
-	DatabasePort int    `required:"true" default:"3306"`
+	Host         string
+	Username     string
+	Database     string
+	Pass         string
+	DatabasePort int
 }
 
 //Config for HTTPS
@@ -75,6 +76,19 @@ func InitConfig(confFile string, createMode bool) (*Config, bool) {
 				return nil, true
 			}
 		}
+
+		//Autocreate folder
+		path, _ := filepath.Split(confFile)
+		_, err := os.Stat(path)
+		if err != nil {
+			err = os.MkdirAll(path, 0770)
+			if err != nil {
+				log.Fatalln(err)
+				return nil, true
+			}
+			log.Info("Creating new directory")
+		}
+
 		config = Config{
 			Server: configServer{
 				AllowRegistration: false,

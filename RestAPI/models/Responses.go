@@ -36,13 +36,13 @@ const (
 )
 
 const (
-	//HeaderStatus headerName for status in response
-	HeaderStatus string = "rstatus"
-	//HeaderStatusMessage headerName for status in response
-	HeaderStatusMessage string = "rmess"
+	//HeaderStatus headername for status in response
+	HeaderStatus string = "X-Response-Status"
+	//HeaderStatusMessage headername for status in response
+	HeaderStatusMessage string = "X-Response-Message"
 )
 
-//LoginResponse response for login
-type LoginResponse struct {
-	Token string `json:"token"`
+//StringResponse response containing only one string
+type StringResponse struct {
+	String string `json:"content"`
 }

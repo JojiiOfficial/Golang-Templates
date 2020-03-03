@@ -21,20 +21,21 @@ var (
 func startAPI() {
 	log.Info("Starting version " + version)
 
-	//Setting up database
-	db.SetErrHook(func(err error, query, prefix string) {
-		logMessage := prefix + query + ": " + err.Error()
+	/*
+		//Setting up database
+		db.SetErrHook(func(err error, query, prefix string) {
+			logMessage := prefix + query + ": " + err.Error()
 
-		//Warn only on production
-		if isDebug {
-			log.Error(logMessage)
-		} else {
-			log.Warn(logMessage)
-		}
-	}, dbhelper.ErrHookOptions{
-		Prefix:         "Query: ",
-		ReturnNilOnErr: false,
-	})
+			//Warn only on production
+			if isDebug {
+				log.Error(logMessage)
+			} else {
+				log.Warn(logMessage)
+			}
+		}, dbhelper.ErrHookOptions{
+			Prefix:         "Query: ",
+			ReturnNilOnErr: false,
+		})*/
 
 	//Create the APIService and start it
 	apiService = services.NewAPIService(db, config)
